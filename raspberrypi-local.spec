@@ -1,10 +1,10 @@
 Name:           raspberrypi-local
 Version:        1.0.4
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Raspberry Pi2 rc.local, config and scripts
 License:        GPLv2+
-URL:            http://www.agrez.net
-Source0:	%{name}-%{version}.tar.gz
+URL:            https://github.com/fedberry
+Source0:	https://github.com/fedberry/raspberrypi-local/blob/master/%{name}-%{version}.tar.gz
 BuildArch:      noarch
 Requires:       initscripts
 Requires:	systemd
@@ -40,8 +40,8 @@ mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/dracut.conf.d
 mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/modules-load.d
 %{__install} -p -m0644 modules-load-snd-bcm2835.conf\
  $RPM_BUILD_ROOT%{_sysconfdir}/modules-load.d/99-snd-bcm2835.conf
-%{__install} -p -m0644 modules-load-bcm2708-wdog.conf\
- $RPM_BUILD_ROOT%{_sysconfdir}/modules-load.d/99-bcm2708-wdog.conf
+#%{__install} -p -m0644 modules-load-bcm2708-wdog.conf\
+# $RPM_BUILD_ROOT%{_sysconfdir}/modules-load.d/99-bcm2708-wdog.conf
 
 ##
 ## /usr/lib/sysctl.d
@@ -110,6 +110,10 @@ mkdir -p $RPM_BUILD_ROOT/boot
 %config(noreplace) %attr(0644,-,-) /usr/lib/udev/rules.d/*.rules
 
 %changelog
+* Tue Jan 26 2016 Vaughan <devel at agrez dot net> - 1.0.4-2
+- bcm2708-wdog module has been removed from kernel-4.3.y series
+- Update URL & Source URL
+
 * Sun Nov 29 2015 Vaughan <devel at agrez dot net> - 1.0.4-1
 - config.txt modifications:
     Add raspberry camera module switches
