@@ -1,17 +1,19 @@
-Name:           raspberrypi-local
-Version:        1.0.4
-Release:        2%{?dist}
-Summary:        Raspberry Pi2 rc.local, config and scripts
+Name:           fedberry-local
+Version:        23
+Release:        1%{?dist}
+Summary:        FedBerry rc.local, config and scripts for the Raspberry Pi 2B
 License:        GPLv2+
 URL:            https://github.com/fedberry
-Source0:	https://github.com/fedberry/raspberrypi-local/blob/master/%{name}-%{version}.tar.gz
+Source0:        https://github.com/fedberry/fedberry-local/blob/master/%{name}-%{version}.tar.xz
 BuildArch:      noarch
 Requires:       initscripts
-Requires:	systemd
+Requires:       systemd
+Obsoletes:      raspberrypi-local
+Conflicts:      raspberrypi-local
 
 
 %description
-Raspberry Pi2 rc.local, config and scripts
+FedBerry rc.local, config and scripts for the Raspberry Pi 2B
 
 %prep
 %setup -q
@@ -110,6 +112,11 @@ mkdir -p $RPM_BUILD_ROOT/boot
 %config(noreplace) %attr(0644,-,-) /usr/lib/udev/rules.d/*.rules
 
 %changelog
+* Thu Feb 04 2016 Vaughan <devel at agrez dot net> - 23-1
+- Rename package to fedberry-local
+- Version now follows FedBerry distro release version
+- Compress source file using xz
+
 * Tue Jan 26 2016 Vaughan <devel at agrez dot net> - 1.0.4-2
 - bcm2708-wdog module has been removed from kernel-4.3.y series
 - Update URL & Source URL
