@@ -1,5 +1,5 @@
 Name:           fedberry-local
-Version:        23
+Version:        23.1
 Release:        1%{?dist}
 Summary:        FedBerry rc.local, config and scripts for the Raspberry Pi 2B
 License:        GPLv2+
@@ -19,7 +19,7 @@ FedBerry rc.local, config and scripts for the Raspberry Pi 2B
 %setup -q
 
 %build
-echo "Nothing to do!"
+
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -39,11 +39,9 @@ mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/dracut.conf.d
 ##
 ## modules-load.d: Modules that wouldn't otherwise auto-load
 ##
-mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/modules-load.d
-%{__install} -p -m0644 modules-load-snd-bcm2835.conf\
- $RPM_BUILD_ROOT%{_sysconfdir}/modules-load.d/99-snd-bcm2835.conf
-#%{__install} -p -m0644 modules-load-bcm2708-wdog.conf\
-# $RPM_BUILD_ROOT%{_sysconfdir}/modules-load.d/99-bcm2708-wdog.conf
+#mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/modules-load.d
+#%{__install} -p -m0644 modules-load-snd-bcm2835.conf\
+# $RPM_BUILD_ROOT%{_sysconfdir}/modules-load.d/99-snd-bcm2835.conf
 
 ##
 ## /usr/lib/sysctl.d
@@ -77,7 +75,7 @@ mkdir -p $RPM_BUILD_ROOT%{_sbindir}
  $RPM_BUILD_ROOT%{_sbindir}/rpi-snd-bcm2835-route-analogue
 %{__install} -p -m0755 rpi-snd-bcm2835-route-hdmi\
  $RPM_BUILD_ROOT%{_sbindir}/rpi-snd-bcm2835-route-hdmi
-
+ 
 ##
 ## /boot config
 ##
@@ -86,32 +84,28 @@ mkdir -p $RPM_BUILD_ROOT/boot
  $RPM_BUILD_ROOT/boot/cmdline.txt
 %{__install} -p -m0644 config.txt\
  $RPM_BUILD_ROOT/boot/config.txt
-%{__install} -p -m0644 config.txt.hdmi_nooverscan\
- $RPM_BUILD_ROOT/boot/config.txt.hdmi_nooverscan
-%{__install} -p -m0644 config.txt.hdmi_overscan\
- $RPM_BUILD_ROOT/boot/config.txt.hdmi_overscan
-%{__install} -p -m0644 config.txt.ntsc_japan\
- $RPM_BUILD_ROOT/boot/config.txt.ntsc_japan
-%{__install} -p -m0644 config.txt.ntsc_northamerica\
- $RPM_BUILD_ROOT/boot/config.txt.ntsc_northamerica
-%{__install} -p -m0644 config.txt.pal\
- $RPM_BUILD_ROOT/boot/config.txt.pal
-%{__install} -p -m0644 config.txt.pal_brazil\
- $RPM_BUILD_ROOT/boot/config.txt.pal_brazil
+
 
 %files
 %doc COPYING
 %config(noreplace) %attr(0755,-,-) %{_sysconfdir}/rc.d/rc.local
 %config(noreplace) %attr(0755,-,-) %{_sysconfdir}/dracut.conf.d/*.conf
-%config(noreplace) %attr(0644,-,-) %{_sysconfdir}/modules-load.d/*.conf
-%attr(0755,-,-) %{_sbindir}/rpi-*
+#%config(noreplace) %attr(0644,-,-) %{_sysconfdir}/modules-load.d/*.conf
+%attr(0755,-,-) %{_sbindir}/*
 %config(noreplace) %attr(0644,-,-) /boot/cmdline.txt
 %config(noreplace) %attr(0644,-,-) /boot/config.txt
-%config %attr(0644,-,-) /boot/config.txt.*
 %config(noreplace) %attr(0644,-,-) /usr/lib/sysctl.d/*.conf
 %config(noreplace) %attr(0644,-,-) /usr/lib/udev/rules.d/*.rules
 
 %changelog
+* Fri Mar 12 2016 Vaughan <devel at agrez dot net> - 23.1-1
+- Drop modules-load-snd-bcm2835.conf (its a DT parameter now)
+- Enable DT parameter audio=on by default
+- Clean up / refactor config.txt options
+- Drop all regional specific config.txt examples.
+- cmdline.txt option elevator=deadline now default for all releases
+- Bump release
+  
 * Thu Feb 04 2016 Vaughan <devel at agrez dot net> - 23-1
 - Rename package to fedberry-local
 - Version now follows FedBerry distro release version
