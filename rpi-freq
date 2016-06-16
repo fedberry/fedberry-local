@@ -1,0 +1,14 @@
+#!/bin/bash
+
+
+##
+## Linux
+##
+echo -e "CPU freq:\t$(cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq)"
+
+##
+## Pi
+##
+for src in arm core h264 isp v3d uart pwm emmc pixel vec hdmi dpi ; do \
+echo -e "CLK $src:\t$(vcgencmd measure_clock $src)" ; \
+done

@@ -1,0 +1,22 @@
+#!/bin/bash
+
+##
+## Use performance governor
+##
+# echo performance > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+
+##
+## Use ondemand governor
+##
+# echo ondemand > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+
+##
+## Make ondemand governor more responsive
+##
+echo 40 > /sys/devices/system/cpu/cpufreq/ondemand/up_threshold
+echo 200000 > /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate
+
+##
+## Disable wi-fi power management
+##
+#iwconfig wlan0 power off >/dev/null 2>&1 || :
