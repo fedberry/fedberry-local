@@ -1,6 +1,6 @@
 Name:           fedberry-local
 Version:        24
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        FedBerry rc.local, config and scripts for the Raspberry Pi 2B
 License:        GPLv2+
 URL:            https://github.com/fedberry
@@ -114,6 +114,9 @@ mkdir -p $RPM_BUILD_ROOT/boot
 %config(noreplace) %attr(0644,-,-) /usr/lib/udev/rules.d/*.rules
 
 %changelog
+* Tue Jun 21 2016 Vaughan <devel at agrez dot net> - 24-2
+- Update cmdline.txt
+
 * Thu Jun 16 2016 Vaughan <devel at agrez dot net> - 24-1
 - Prep for FedBerry 24 release
 - Split out all files
