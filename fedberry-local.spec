@@ -1,6 +1,6 @@
 Name:           fedberry-local
 Version:        24
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        FedBerry rc.local, config and scripts for the Raspberry Pi 2B
 License:        GPLv2+
 URL:            https://github.com/fedberry
@@ -114,6 +114,10 @@ mkdir -p $RPM_BUILD_ROOT/boot
 %config(noreplace) %attr(0644,-,-) /usr/lib/udev/rules.d/*.rules
 
 %changelog
+* Sun Aug 21 2016 Vaughan <devel at agrez dot net> - 24-3
+- Set console_loglevel to print KERN_WARNING (2) or more severe
+  messages (rc.local)
+
 * Tue Jun 21 2016 Vaughan <devel at agrez dot net> - 24-2
 - Update cmdline.txt
 
