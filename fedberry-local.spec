@@ -1,34 +1,35 @@
-Name:           fedberry-local
-Version:        24
-Release:        3%{?dist}
-Summary:        FedBerry rc.local, config and scripts for the Raspberry Pi 2B
-License:        GPLv2+
-URL:            https://github.com/fedberry
-Source0:        https://github.com/fedberry/fedberry-local/blob/master/cmdline.txt
-Source1:        https://github.com/fedberry/fedberry-local/blob/master/config.txt
-Source2:        https://github.com/fedberry/fedberry-local/blob/master/COPYING
-Source3:        https://github.com/fedberry/fedberry-local/blob/master/dracut-rpi.conf
-Source4:        https://github.com/fedberry/fedberry-local/blob/master/rc.local
-Source5:        https://github.com/fedberry/fedberry-local/blob/master/rpi-snd-bcm2835-route-analogue
-Source6:        https://github.com/fedberry/fedberry-local/blob/master/rpi-snd-bcm2835-route-auto
-Source7:        https://github.com/fedberry/fedberry-local/blob/master/rpi-snd-bcm2835-route-hdmi
-Source8:        https://github.com/fedberry/fedberry-local/blob/master/sysctl-vm_min_free_kbytes.conf
-Source9:        https://github.com/fedberry/fedberry-local/blob/master/udev-vchiq-permissions.rules
-
-BuildArch:      noarch
-Requires:       initscripts
-Requires:       systemd
-Obsoletes:      raspberrypi-local
-Conflicts:      raspberrypi-local
+Name:       fedberry-local
+Version:    24
+Release:    4%{?dist}
+Summary:    FedBerry rc.local, config and scripts for the Raspberry Pi 2/3 B
+License:    GPLv2+
+URL:        https://github.com/fedberry
+Source0:    https://github.com/fedberry/%{name}/blob/master/cmdline.txt
+Source1:    https://github.com/fedberry/%{name}/blob/master/config.txt
+Source2:    https://github.com/fedberry/%{name}/blob/master/COPYING
+Source3:    https://github.com/fedberry/%{name}/blob/master/dracut-rpi.conf
+Source4:    https://github.com/fedberry/%{name}/blob/master/rc.local
+Source5:    https://github.com/fedberry/%{name}/blob/master/rpi-snd-bcm2835-route-analogue
+Source6:    https://github.com/fedberry/%{name}/blob/master/rpi-snd-bcm2835-route-auto
+Source7:    https://github.com/fedberry/%{name}/blob/master/rpi-snd-bcm2835-route-hdmi
+Source8:    https://github.com/fedberry/%{name}/blob/master/sysctl-vm_min_free_kbytes.conf
+Source9:    https://github.com/fedberry/%{name}/blob/master/udev-vchiq-permissions.rules
+BuildArch:  noarch
+Requires:   initscripts
+Requires:   systemd
+Obsoletes:  raspberrypi-local
+Conflicts:  raspberrypi-local
 
 
 %description
-FedBerry rc.local, config and scripts for the Raspberry Pi 2B
+%{summary}.
+
 
 %prep
 %setup -c -T
 cp -a %{SOURCE0} %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} %{SOURCE5} %{SOURCE6} %{SOURCE7} \
 %{SOURCE8} %{SOURCE9} .
+
 
 %build
 
@@ -73,14 +74,6 @@ mkdir -p $RPM_BUILD_ROOT/usr/lib/udev/rules.d
 ## Utility scripts
 ##
 mkdir -p $RPM_BUILD_ROOT%{_sbindir}
-%{__install} -p -m0755 rpi-freq\
- $RPM_BUILD_ROOT%{_sbindir}/rpi-freq
-%{__install} -p -m0755 rpi-mem\
- $RPM_BUILD_ROOT%{_sbindir}/rpi-mem
-%{__install} -p -m0755 rpi-temp\
- $RPM_BUILD_ROOT%{_sbindir}/rpi-temp
-%{__install} -p -m0755 rpi-volts\
- $RPM_BUILD_ROOT%{_sbindir}/rpi-volts
 %{__install} -p -m0755 rpi-snd-bcm2835-route-auto\
  $RPM_BUILD_ROOT%{_sbindir}/rpi-snd-bcm2835-route-auto
 %{__install} -p -m0755 rpi-snd-bcm2835-route-analogue\
@@ -109,7 +102,12 @@ mkdir -p $RPM_BUILD_ROOT/boot
 %config(noreplace) %attr(0644,-,-) /usr/lib/sysctl.d/*.conf
 %config(noreplace) %attr(0644,-,-) /usr/lib/udev/rules.d/*.rules
 
+
 %changelog
+* Fri Sep 16 2016 Vaughan <devel at agrez dot net> - 24-4
+- Update cmdline.txt
+- Drop rpi-[freq mem temp volts] scripts
+
 * Sun Aug 21 2016 Vaughan <devel at agrez dot net> - 24-3
 - Set console_loglevel to print KERN_WARNING (2) or more severe
   messages (rc.local)
