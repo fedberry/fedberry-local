@@ -9,15 +9,11 @@ Source1:        https://github.com/fedberry/fedberry-local/blob/master/config.tx
 Source2:        https://github.com/fedberry/fedberry-local/blob/master/COPYING
 Source3:        https://github.com/fedberry/fedberry-local/blob/master/dracut-rpi.conf
 Source4:        https://github.com/fedberry/fedberry-local/blob/master/rc.local
-Source5:        https://github.com/fedberry/fedberry-local/blob/master/rpi-freq
-Source6:        https://github.com/fedberry/fedberry-local/blob/master/rpi-mem
-Source7:        https://github.com/fedberry/fedberry-local/blob/master/rpi-snd-bcm2835-route-analogue
-Source8:        https://github.com/fedberry/fedberry-local/blob/master/rpi-snd-bcm2835-route-auto
-Source9:        https://github.com/fedberry/fedberry-local/blob/master/rpi-snd-bcm2835-route-hdmi
-Source10:       https://github.com/fedberry/fedberry-local/blob/master/rpi-temp
-Source11:       https://github.com/fedberry/fedberry-local/blob/master/rpi-volts
-Source12:       https://github.com/fedberry/fedberry-local/blob/master/sysctl-vm_min_free_kbytes.conf
-Source13:       https://github.com/fedberry/fedberry-local/blob/master/udev-vchiq-permissions.rules
+Source5:        https://github.com/fedberry/fedberry-local/blob/master/rpi-snd-bcm2835-route-analogue
+Source6:        https://github.com/fedberry/fedberry-local/blob/master/rpi-snd-bcm2835-route-auto
+Source7:        https://github.com/fedberry/fedberry-local/blob/master/rpi-snd-bcm2835-route-hdmi
+Source8:        https://github.com/fedberry/fedberry-local/blob/master/sysctl-vm_min_free_kbytes.conf
+Source9:        https://github.com/fedberry/fedberry-local/blob/master/udev-vchiq-permissions.rules
 
 BuildArch:      noarch
 Requires:       initscripts
@@ -32,7 +28,7 @@ FedBerry rc.local, config and scripts for the Raspberry Pi 2B
 %prep
 %setup -c -T
 cp -a %{SOURCE0} %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} %{SOURCE5} %{SOURCE6} %{SOURCE7} \
-%{SOURCE8} %{SOURCE9} %{SOURCE10} %{SOURCE11} %{SOURCE12} %{SOURCE13} .
+%{SOURCE8} %{SOURCE9} .
 
 %build
 

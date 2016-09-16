@@ -1,8 +1,0 @@
-#!/bin/bash
-
-##
-## Pi
-##
-for id in arm gpu; do \
-echo -e "$(vcgencmd get_mem $id)" ; \
-done
