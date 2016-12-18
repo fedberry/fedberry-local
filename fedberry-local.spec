@@ -1,6 +1,6 @@
 Name:       fedberry-local
 Version:    24
-Release:    4%{?dist}
+Release:    5%{?dist}
 Summary:    FedBerry rc.local, config and scripts for the Raspberry Pi 2/3 B
 License:    GPLv2+
 URL:        https://github.com/fedberry
@@ -103,6 +103,10 @@ mkdir -p $RPM_BUILD_ROOT/boot
 
 
 %changelog
+* Sun Dec 18 2016 Vaughan <devel at agrez dot net> - 24-5
+- Add cgroup_disable=memory to cmdline.txt
+- Update %%prep section
+
 * Fri Sep 16 2016 Vaughan <devel at agrez dot net> - 24-4
 - Update cmdline.txt
 - Drop rpi-[freq mem temp volts] scripts
