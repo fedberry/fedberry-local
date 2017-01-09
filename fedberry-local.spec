@@ -1,7 +1,7 @@
 Name:       fedberry-local
-Version:    24
-Release:    5%{?dist}
-Summary:    FedBerry rc.local, config and scripts for the Raspberry Pi 2/3 B
+Version:    25
+Release:    1%{?dist}
+Summary:    FedBerry rc.local, configs and scripts for the Raspberry Pi
 License:    GPLv2+
 URL:        https://github.com/fedberry
 Source0:    https://github.com/fedberry/%{name}/blob/master/cmdline.txt
@@ -103,6 +103,9 @@ mkdir -p $RPM_BUILD_ROOT/boot
 
 
 %changelog
+* Mon Jan 02 2017 Vaughan <devel at agrez dot net> - 25-1
+- Bump release
+
 * Sun Dec 18 2016 Vaughan <devel at agrez dot net> - 24-5
 - Add cgroup_disable=memory to cmdline.txt
 - Update %%prep section
