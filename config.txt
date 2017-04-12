@@ -13,6 +13,8 @@ gpu_mem=32
 ### Set console framebuffer depth
 #framebuffer_depth=16
 
+### Disable rainbow splash at boot
+disable_splash=1
 
 ### Raspberry camera module (requires gpu_mem=128 or more to work)
 #start_x=1
@@ -24,7 +26,6 @@ gpu_mem=32
 # sdram_freq=500
 # over_voltage=2
 # force_turbo=0
-
 
 
 ### Display Options
