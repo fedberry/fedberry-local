@@ -10,8 +10,9 @@
 ### Sets the memory split between the CPU and GPU
 gpu_mem=32
 
-### Set console framebuffer depth to 24bit
-#framebuffer_depth=24
+### Set console framebuffer depth
+#framebuffer_depth=16
+
 
 ### Raspberry camera module (requires gpu_mem=128 or more to work)
 #start_x=1
