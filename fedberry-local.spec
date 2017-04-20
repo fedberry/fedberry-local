@@ -1,6 +1,6 @@
 Name:       fedberry-local
 Version:    25
-Release:    2%{?dist}
+Release:    3%{?dist}
 Summary:    FedBerry rc.local, configs and scripts for the Raspberry Pi
 License:    GPLv2+
 URL:        https://github.com/fedberry
@@ -103,6 +103,9 @@ mkdir -p $RPM_BUILD_ROOT/boot
 
 
 %changelog
+* Mon Apr 17 2017 Vaughan <devel at agrez dot net> - 25-3
+- Remove plymouth options from default cmdline.txt
+
 * Mon Apr 10 2017 Vaughan <devel at agrez dot net> - 25-2
 - Update cmdline.txt & config.txt files
 
