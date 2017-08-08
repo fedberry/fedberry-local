@@ -10,22 +10,12 @@
 ### Sets the memory split between the CPU and GPU
 gpu_mem=32
 
-### Set console framebuffer depth
-#framebuffer_depth=16
-
 ### Disable rainbow splash at boot
 disable_splash=1
 
 ### Raspberry camera module (requires gpu_mem=128 or more to work)
 #start_x=1
 #disable_camera_led=1
-
-### Pi2 Overclock Options
-# arm_freq=1000
-# core_freq=500
-# sdram_freq=500
-# over_voltage=2
-# force_turbo=0
 
 
 ### Display Options
@@ -90,8 +80,4 @@ dtparam=audio=on
 
 
 ### Misc Device tree overlays
-
-# LIRC
-#dtoverlay=lirc-rpi
-
 
