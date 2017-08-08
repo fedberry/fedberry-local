@@ -1,6 +1,6 @@
 Name:       fedberry-local
-Version:    25
-Release:    3%{?dist}
+Version:    26
+Release:    1%{?dist}
 Summary:    FedBerry rc.local, configs and scripts for the Raspberry Pi
 License:    GPLv2+
 URL:        https://github.com/fedberry
@@ -17,8 +17,6 @@ Source9:    https://github.com/fedberry/%{name}/blob/master/udev-vchiq-permissio
 BuildArch:  noarch
 Requires:   initscripts
 Requires:   systemd
-Obsoletes:  raspberrypi-local
-Conflicts:  raspberrypi-local
 
 
 %description
@@ -27,82 +25,75 @@ Conflicts:  raspberrypi-local
 
 %prep
 %setup -c -T
-cp -a %{sources} .
+cp -a %{SOURCE2} .
 
 
 %build
 
 
 %install
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 ##
 ## rc.local
 ##
-mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/rc.d
-%{__install} -p -m0755 rc.local $RPM_BUILD_ROOT%{_sysconfdir}/rc.d/rc.local
+mkdir -p %{buildroot}/%{_sysconfdir}/rc.d
+%{__install} -p -m0755 %{SOURCE4} %{buildroot}/%{_sysconfdir}/rc.d/
 
 ##
 ## dracut.conf.d
 ##
-mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/dracut.conf.d
-%{__install} -p -m0755 dracut-rpi.conf $RPM_BUILD_ROOT%{_sysconfdir}/dracut.conf.d/rpi.conf
- 
-##
-## modules-load.d: Modules that wouldn't otherwise auto-load
-##
-#mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/modules-load.d
-#%{__install} -p -m0644 modules-load-snd-bcm2835.conf\
-# $RPM_BUILD_ROOT%{_sysconfdir}/modules-load.d/99-snd-bcm2835.conf
+mkdir -p %{buildroot}/%{_sysconfdir}/dracut.conf.d
+%{__install} -p -m0755 %{SOURCE3} \
+%{buildroot}/%{_sysconfdir}/dracut.conf.d/rpi.conf
 
 ##
 ## /usr/lib/sysctl.d
 ##
-mkdir -p $RPM_BUILD_ROOT/usr/lib/sysctl.d/
-%{__install} -p -m0644 sysctl-vm_min_free_kbytes.conf\
- $RPM_BUILD_ROOT/usr/lib/sysctl.d/99-vm_min_free_kbytes.conf
+mkdir -p %{buildroot}/%{_libdir}/sysctl.d
+%{__install} -p -m0644 %{SOURCE8} \
+%{buildroot}/%{_libdir}/sysctl.d/99-vm_min_free_kbytes.conf
 
 ##
 ## /usr/lib/udev/rules.d
 ##
-mkdir -p $RPM_BUILD_ROOT/usr/lib/udev/rules.d
-%{__install} -p -m0644 udev-vchiq-permissions.rules\
- $RPM_BUILD_ROOT/usr/lib/udev/rules.d/10-vchiq-permissions.rules
+mkdir -p %{buildroot}/%{_libdir}/udev/rules.d
+%{__install} -p -m0644 %{SOURCE9} \
+%{buildroot}/%{_libdir}/udev/rules.d/10-vchiq-permissions.rules
 
 ##
 ## Utility scripts
 ##
-mkdir -p $RPM_BUILD_ROOT%{_sbindir}
-%{__install} -p -m0755 rpi-snd-bcm2835-route-auto\
- $RPM_BUILD_ROOT%{_sbindir}/rpi-snd-bcm2835-route-auto
-%{__install} -p -m0755 rpi-snd-bcm2835-route-analogue\
- $RPM_BUILD_ROOT%{_sbindir}/rpi-snd-bcm2835-route-analogue
-%{__install} -p -m0755 rpi-snd-bcm2835-route-hdmi\
- $RPM_BUILD_ROOT%{_sbindir}/rpi-snd-bcm2835-route-hdmi
- 
+mkdir -p %{buildroot}/%{_sbindir}
+%{__install} -p -m0755 %{SOURCE6} %{buildroot}/%{_sbindir}/
+%{__install} -p -m0755 %{SOURCE5} %{buildroot}/%{_sbindir}/
+%{__install} -p -m0755 %{SOURCE7} %{buildroot}/%{_sbindir}/
+
 ##
 ## /boot config
 ##
-mkdir -p $RPM_BUILD_ROOT/boot
-%{__install} -p -m0644 cmdline.txt\
- $RPM_BUILD_ROOT/boot/cmdline.txt
-%{__install} -p -m0644 config.txt\
- $RPM_BUILD_ROOT/boot/config.txt
+mkdir -p %{buildroot}/boot
+%{__install} -p -m0644 %{SOURCE0} %{buildroot}/boot/
+%{__install} -p -m0644 %{SOURCE1} %{buildroot}/boot/
 
 
 %files
 %doc COPYING
 %config(noreplace) %attr(0755,-,-) %{_sysconfdir}/rc.d/rc.local
 %config(noreplace) %attr(0755,-,-) %{_sysconfdir}/dracut.conf.d/*.conf
-#%config(noreplace) %attr(0644,-,-) %{_sysconfdir}/modules-load.d/*.conf
 %attr(0755,-,-) %{_sbindir}/*
 %config(noreplace) %attr(0644,-,-) /boot/cmdline.txt
 %config(noreplace) %attr(0644,-,-) /boot/config.txt
-%config(noreplace) %attr(0644,-,-) /usr/lib/sysctl.d/*.conf
-%config(noreplace) %attr(0644,-,-) /usr/lib/udev/rules.d/*.rules
+%config(noreplace) %attr(0644,-,-) /%{_libdir}/sysctl.d/*.conf
+%config(noreplace) %attr(0644,-,-) /%{_libdir}/udev/rules.d/*.rules
 
 
 %changelog
+* Mon Aug 07 2017 Vaughan <devel at agrez dot net> - 26-1
+- Bump release for Fedberry 26
+- Clean up spec
+- Update config.txt defaults
+
 * Mon Apr 17 2017 Vaughan <devel at agrez dot net> - 25-3
 - Remove plymouth options from default cmdline.txt
 
