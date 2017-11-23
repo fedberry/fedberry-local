@@ -1,5 +1,5 @@
 Name:       fedberry-local
-Version:    26
+Version:    27
 Release:    1%{?dist}
 Summary:    FedBerry rc.local, configs and scripts for the Raspberry Pi
 License:    GPLv2+
@@ -89,6 +89,9 @@ mkdir -p %{buildroot}/boot
 
 
 %changelog
+* Thu Nov 23 2017 Vaughan <devel at agrez dot net> - 27-1
+- Bump release for Fedberry 27
+
 * Mon Aug 07 2017 Vaughan <devel at agrez dot net> - 26-1
 - Bump release for Fedberry 26
 - Clean up spec
