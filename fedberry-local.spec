@@ -14,6 +14,7 @@ Source6:    https://github.com/fedberry/%{name}/blob/master/rpi-snd-bcm2835-rout
 Source7:    https://github.com/fedberry/%{name}/blob/master/rpi-snd-bcm2835-route-hdmi
 Source8:    https://github.com/fedberry/%{name}/blob/master/sysctl-vm_min_free_kbytes.conf
 Source9:    https://github.com/fedberry/%{name}/blob/master/udev-vchiq-permissions.rules
+Source10:   https://github.com/fedberry/%{name}/blob/master/sysctl-quiet-printk.conf
 BuildArch:  noarch
 Requires:   initscripts
 Requires:   systemd
@@ -53,6 +54,8 @@ mkdir -p %{buildroot}/%{_sysconfdir}/dracut.conf.d
 mkdir -p %{buildroot}/%{_libdir}/sysctl.d
 %{__install} -p -m0644 %{SOURCE8} \
 %{buildroot}/%{_libdir}/sysctl.d/99-vm_min_free_kbytes.conf
+%{__install} -p -m0644 %{SOURCE10} \
+%{buildroot}/%{_libdir}/sysctl.d/20-quiet-printk.conf
 
 ##
 ## /usr/lib/udev/rules.d
