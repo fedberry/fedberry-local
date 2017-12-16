@@ -1,6 +1,6 @@
 Name:       fedberry-local
 Version:    27
-Release:    2%{?dist}
+Release:    3%{?dist}
 Summary:    FedBerry rc.local, configs and scripts for the Raspberry Pi
 License:    GPLv2+
 URL:        https://github.com/fedberry
@@ -92,6 +92,9 @@ mkdir -p %{buildroot}/boot
 
 
 %changelog
+* Thu Dec 14 2017 Vaughan <devel at agrez dot net> - 27-3
+- brcmfmac is still too noisy (add Source 10)
+
 * Sun Dec 10 2017 Vaughan <devel at agrez dot net> - 27-2
 - Drop cgroup_disable=memory from cmdline.txt
 
