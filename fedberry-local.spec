@@ -1,6 +1,6 @@
 Name:       fedberry-local
 Version:    27
-Release:    3%{?dist}
+Release:    4%{?dist}
 Summary:    FedBerry rc.local, configs and scripts for the Raspberry Pi
 License:    GPLv2+
 URL:        https://github.com/fedberry
@@ -92,6 +92,9 @@ mkdir -p %{buildroot}/boot
 
 
 %changelog
+* Sun Mar 25 2018 Vaughan <devel at agrez dot net> - 27-4
+- Add fsck.repair=yes to cmdline.txt
+
 * Thu Dec 14 2017 Vaughan <devel at agrez dot net> - 27-3
 - brcmfmac is still too noisy (add Source 10)
 
