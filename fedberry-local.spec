@@ -15,6 +15,8 @@ Source7:    https://github.com/fedberry/%{name}/blob/master/rpi-snd-bcm2835-rout
 Source8:    https://github.com/fedberry/%{name}/blob/master/sysctl-vm_min_free_kbytes.conf
 Source9:    https://github.com/fedberry/%{name}/blob/master/udev-vchiq-permissions.rules
 Source10:   https://github.com/fedberry/%{name}/blob/master/sysctl-quiet-printk.conf
+Source11:   https://github.com/fedberry/%{name}/blob/master/pulseaudio-raspberrypi.conf
+Source12:   https://github.com/fedberry/%{name}/blob/master/pulseaudio-rpi.rules
 BuildArch:  noarch
 Requires:   initscripts
 Requires:   systemd
@@ -63,6 +65,8 @@ mkdir -p %{buildroot}/%{_libdir}/sysctl.d
 mkdir -p %{buildroot}/%{_libdir}/udev/rules.d
 %{__install} -p -m0644 %{SOURCE9} \
 %{buildroot}/%{_libdir}/udev/rules.d/10-vchiq-permissions.rules
+%{__install} -p -m0644 %{SOURCE12} \
+%{buildroot}/%{_libdir}/udev/rules.d/91-pulseaudio-rpi.rules
 
 ##
 ## Utility scripts
@@ -79,6 +83,12 @@ mkdir -p %{buildroot}/boot
 %{__install} -p -m0644 %{SOURCE0} %{buildroot}/boot/
 %{__install} -p -m0644 %{SOURCE1} %{buildroot}/boot/
 
+##
+## pulseaudio profile
+##
+mkdir -p %{buildroot}/%{_datadir}/pulseaudio/alsa-mixer/profile-sets
+%{__install} -p -m0644 %{SOURCE11} \
+%{buildroot}/%{_datadir}/pulseaudio/alsa-mixer/profile-sets/raspberrypi.conf
 
 %files
 %doc COPYING
@@ -89,6 +99,7 @@ mkdir -p %{buildroot}/boot
 %config(noreplace) %attr(0644,-,-) /boot/config.txt
 %config(noreplace) %attr(0644,-,-) /%{_libdir}/sysctl.d/*.conf
 %config(noreplace) %attr(0644,-,-) /%{_libdir}/udev/rules.d/*.rules
+%{_datadir}/pulseaudio/alsa-mixer/profile-sets/*.conf
 
 
 %changelog

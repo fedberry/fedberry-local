@@ -1,0 +1,7 @@
+SUBSYSTEM!="sound", GOTO="pulseaudio_end"
+ACTION!="change", GOTO="pulseaudio_end"
+KERNEL!="card*", GOTO="pulseaudio_end"
+
+SUBSYSTEMS=="sound", DEVPATH=="/devices/platform/soc/soc:audio/bcm2835_alsa/sound/card?", ENV{PULSE_PROFILE_SET}="raspberrypi.conf"
+
+LABEL="pulseaudio_end"
