@@ -1,6 +1,6 @@
 Name:       fedberry-local
 Version:    27
-Release:    4%{?dist}
+Release:    5%{?dist}
 Summary:    FedBerry rc.local, configs and scripts for the Raspberry Pi
 License:    GPLv2+
 URL:        https://github.com/fedberry
@@ -112,17 +112,21 @@ tar xvfJ %{SOURCE13} -C %{buildroot}/%{_sysconfdir}/skel/.config
 
 %files
 %doc COPYING
-%config(noreplace) %attr(0755,-,-) %{_sysconfdir}/rc.d/rc.local
-%config(noreplace) %attr(0755,-,-) %{_sysconfdir}/dracut.conf.d/*.conf
-%attr(0755,-,-) %{_sbindir}/*
-%config(noreplace) %attr(0644,-,-) /boot/cmdline.txt
-%config(noreplace) %attr(0644,-,-) /boot/config.txt
-%config(noreplace) %attr(0644,-,-) /%{_libdir}/sysctl.d/*.conf
-%config(noreplace) %attr(0644,-,-) /%{_libdir}/udev/rules.d/*.rules
+%{_sbindir}/*
+%config(noreplace) %{_sysconfdir}/rc.d/rc.local
+%config(noreplace) %{_sysconfdir}/dracut.conf.d/*.conf
+%config(noreplace) /boot/cmdline.txt
+%config(noreplace) /boot/config.txt
+%config(noreplace) %{_libdir}/sysctl.d/*.conf
+%{_libdir}/udev/rules.d/*.rules
 %{_datadir}/pulseaudio/alsa-mixer/profile-sets/*.conf
 
 
 %changelog
+* Fri Mar 30 2018 Vaughan <devel at agrez dot net> - 27-5
+- Add pulseaudio profile and udev rule
+- Add package for xfce default settings
+
 * Sun Mar 25 2018 Vaughan <devel at agrez dot net> - 27-4
 - Add fsck.repair=yes to cmdline.txt
 
