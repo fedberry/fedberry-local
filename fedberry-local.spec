@@ -17,13 +17,22 @@ Source9:    https://github.com/fedberry/%{name}/blob/master/udev-vchiq-permissio
 Source10:   https://github.com/fedberry/%{name}/blob/master/sysctl-quiet-printk.conf
 Source11:   https://github.com/fedberry/%{name}/blob/master/pulseaudio-raspberrypi.conf
 Source12:   https://github.com/fedberry/%{name}/blob/master/pulseaudio-rpi.rules
+Source13:   https://github.com/fedberry/%{name}/blob/master/fedberry-xfce-defaults.tar.xz
 BuildArch:  noarch
 Requires:   initscripts
 Requires:   systemd
 
 
+%package xfce-config
+Summary: Default Fedberry configuration files for Xfce
+
+
 %description
 %{summary}.
+
+
+%description xfce-config
+This package contains default Fedberry configuration files for Xfce.
 
 
 %prep
@@ -89,6 +98,17 @@ mkdir -p %{buildroot}/boot
 mkdir -p %{buildroot}/%{_datadir}/pulseaudio/alsa-mixer/profile-sets
 %{__install} -p -m0644 %{SOURCE11} \
 %{buildroot}/%{_datadir}/pulseaudio/alsa-mixer/profile-sets/raspberrypi.conf
+
+##
+## /etc/skel files
+##
+mkdir -p %{buildroot}/%{_sysconfdir}/skel/.config
+tar xvfJ %{SOURCE13} -C %{buildroot}/%{_sysconfdir}/skel/.config
+
+
+%files xfce-config
+%config(noreplace) %attr(0755,-,-) %{_sysconfdir}/skel/.config/xfce4/xfconf/xfce-perchannel-xml/*.xml
+
 
 %files
 %doc COPYING
