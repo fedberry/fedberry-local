@@ -21,6 +21,7 @@ Source13:   https://github.com/fedberry/%{name}/blob/master/fedberry-xfce-defaul
 Source14:   https://github.com/fedberry/%{name}/blob/master/default-gtk2.conf
 Source15:   https://github.com/fedberry/%{name}/blob/master/default-gtk3.conf
 Source16:   https://github.com/fedberry/%{name}/blob/master/xorg-fbturbo.conf
+Source17:   https://github.com/fedberry/%{name}/blob/master/disable-pulseaudio.desktop
 BuildArch:  noarch
 Requires:   initscripts
 Requires:   systemd
@@ -115,11 +116,14 @@ mkdir -p %{buildroot}/boot
 %{__install} -p -m0644 %{SOURCE1} %{buildroot}/boot/
 
 ##
-## pulseaudio profile
+## pulseaudio :-/
 ##
 mkdir -p %{buildroot}/%{_datadir}/pulseaudio/alsa-mixer/profile-sets
 %{__install} -p -m0644 %{SOURCE11} \
 %{buildroot}/%{_datadir}/pulseaudio/alsa-mixer/profile-sets/raspberrypi.conf
+mkdir -p %{buildroot}/%{_sysconfdir}/skel/.config/autostart
+%{__install} -p -m0644 %{SOURCE17} \
+%{buildroot}/%{_sysconfdir}/skel/.config/autostart/pulseaudio.desktop
 
 ##
 ## /etc/skel files
@@ -169,6 +173,7 @@ fi
 %files
 %doc COPYING
 %{_sbindir}/*
+%{_sysconfdir}/skel/.config/autostart/pulseaudio.desktop
 %config(noreplace) %{_sysconfdir}/rc.d/rc.local
 %config(noreplace) %{_sysconfdir}/dracut.conf.d/*.conf
 %config(noreplace) /boot/cmdline.txt
