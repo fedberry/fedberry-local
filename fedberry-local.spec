@@ -20,6 +20,7 @@ Source12:   https://github.com/fedberry/%{name}/blob/master/pulseaudio-rpi.rules
 Source13:   https://github.com/fedberry/%{name}/blob/master/fedberry-xfce-defaults.tar.xz
 Source14:   https://github.com/fedberry/%{name}/blob/master/default-gtk2.conf
 Source15:   https://github.com/fedberry/%{name}/blob/master/default-gtk3.conf
+Source16:   https://github.com/fedberry/%{name}/blob/master/xorg-fbturbo.conf
 BuildArch:  noarch
 Requires:   initscripts
 Requires:   systemd
@@ -34,6 +35,12 @@ Summary: Default Fedberry configuration files for GTK+2/3
 Requires: breeze-gtk
 Requires: breeze-icon-theme
 Requires: breeze-cursor-theme
+
+%package xorg-config
+Summary: Default Fedberry configuration files for xorg
+Requires: xorg-x11-drv-fbturbo
+
+
 %description
 %{summary}.
 
@@ -44,6 +51,12 @@ This package contains default Fedberry configuration files for Xfce.
 
 %description gtk-config
 This package contains default Fedberry configuration files for GTK+2/3.
+
+
+%description xorg-config
+This package contains default Fedberry configuration files for xorg.
+
+
 %prep
 %setup -c -T
 cp -a %{SOURCE2} .
@@ -125,6 +138,21 @@ mkdir -p %{buildroot}/%{_sysconfdir}/gtk-3.0
 %{__install} -p -m0755 %{SOURCE15} \
 %{buildroot}/%{_sysconfdir}/gtk-3.0/settings.ini
 
+##
+## xorg.conf.d
+##
+mkdir -p %{buildroot}/%{_datadir}/X11/xorg.conf.d
+%{__install} -p -m0755 %{SOURCE16} \
+%{buildroot}/%{_datadir}/X11/xorg.conf.d/20-fbturbo.conf
+
+
+%post
+# Older upgraded installs that haven't installed the new xorg-conf package
+if [ -f %{_sysconfdir}/X11/xorg.conf.d/20-fbturbo.conf ] && [ ! -f %{_datadir}/X11/xorg.conf.d/20-fbturbo.conf ]; then
+    cp -f %{_sysconfdir}/X11/xorg.conf.d/20-fbturbo.conf %{_datadir}/X11/xorg.conf.d/
+fi
+
+
 %files xfce-config
 %attr(0755,-,-) %{_sysconfdir}/skel/.config/xfce4/xfconf/xfce-perchannel-xml/*.xml
 
@@ -132,6 +160,12 @@ mkdir -p %{buildroot}/%{_sysconfdir}/gtk-3.0
 %files gtk-config
 %config(noreplace) %attr(0755,-,-) %{_sysconfdir}/gtk-2.0/gtkrc
 %config(noreplace) %attr(0755,-,-) %{_sysconfdir}/gtk-3.0/settings.ini
+
+
+%files xorg-config
+%config(noreplace) %attr(0755,-,-) %{_datadir}/X11/xorg.conf.d/20-fbturbo.conf
+
+
 %files
 %doc COPYING
 %{_sbindir}/*
