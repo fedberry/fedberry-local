@@ -18,6 +18,8 @@ Source10:   https://github.com/fedberry/%{name}/blob/master/sysctl-quiet-printk.
 Source11:   https://github.com/fedberry/%{name}/blob/master/pulseaudio-raspberrypi.conf
 Source12:   https://github.com/fedberry/%{name}/blob/master/pulseaudio-rpi.rules
 Source13:   https://github.com/fedberry/%{name}/blob/master/fedberry-xfce-defaults.tar.xz
+Source14:   https://github.com/fedberry/%{name}/blob/master/default-gtk2.conf
+Source15:   https://github.com/fedberry/%{name}/blob/master/default-gtk3.conf
 BuildArch:  noarch
 Requires:   initscripts
 Requires:   systemd
@@ -27,6 +29,11 @@ Requires:   systemd
 Summary: Default Fedberry configuration files for Xfce
 
 
+%package gtk-config
+Summary: Default Fedberry configuration files for GTK+2/3
+Requires: breeze-gtk
+Requires: breeze-icon-theme
+Requires: breeze-cursor-theme
 %description
 %{summary}.
 
@@ -35,6 +42,8 @@ Summary: Default Fedberry configuration files for Xfce
 This package contains default Fedberry configuration files for Xfce.
 
 
+%description gtk-config
+This package contains default Fedberry configuration files for GTK+2/3.
 %prep
 %setup -c -T
 cp -a %{SOURCE2} .
@@ -105,11 +114,24 @@ mkdir -p %{buildroot}/%{_datadir}/pulseaudio/alsa-mixer/profile-sets
 mkdir -p %{buildroot}/%{_sysconfdir}/skel/.config
 tar xvfJ %{SOURCE13} -C %{buildroot}/%{_sysconfdir}/skel/.config
 
+##
+## GTK+ configuration files
+##
+mkdir -p %{buildroot}/%{_sysconfdir}/gtk-2.0
+%{__install} -p -m0755 %{SOURCE14} \
+%{buildroot}/%{_sysconfdir}/gtk-2.0/gtkrc
+
+mkdir -p %{buildroot}/%{_sysconfdir}/gtk-3.0
+%{__install} -p -m0755 %{SOURCE15} \
+%{buildroot}/%{_sysconfdir}/gtk-3.0/settings.ini
 
 %files xfce-config
 %attr(0755,-,-) %{_sysconfdir}/skel/.config/xfce4/xfconf/xfce-perchannel-xml/*.xml
 
 
+%files gtk-config
+%config(noreplace) %attr(0755,-,-) %{_sysconfdir}/gtk-2.0/gtkrc
+%config(noreplace) %attr(0755,-,-) %{_sysconfdir}/gtk-3.0/settings.ini
 %files
 %doc COPYING
 %{_sbindir}/*
