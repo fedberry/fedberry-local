@@ -107,7 +107,7 @@ tar xvfJ %{SOURCE13} -C %{buildroot}/%{_sysconfdir}/skel/.config
 
 
 %files xfce-config
-%config(noreplace) %attr(0755,-,-) %{_sysconfdir}/skel/.config/xfce4/xfconf/xfce-perchannel-xml/*.xml
+%attr(0755,-,-) %{_sysconfdir}/skel/.config/xfce4/xfconf/xfce-perchannel-xml/*.xml
 
 
 %files
