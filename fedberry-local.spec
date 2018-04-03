@@ -1,6 +1,6 @@
 Name:       fedberry-local
 Version:    27
-Release:    5%{?dist}
+Release:    6%{?dist}
 Summary:    FedBerry rc.local, configs and scripts for the Raspberry Pi
 License:    GPLv2+
 URL:        https://github.com/fedberry
@@ -184,6 +184,12 @@ fi
 
 
 %changelog
+* Tue Apr 03 2018 Vaughan <devel at agrez dot net> - 27-6
+- Add package for default GTK+2/3 settings
+- Add package for xorg.conf.d config (fbturbo.conf)
+- Update default xfce settings
+- Disable autostart of pulseaudio (for the moment)
+
 * Fri Mar 30 2018 Vaughan <devel at agrez dot net> - 27-5
 - Add pulseaudio profile and udev rule
 - Add package for xfce default settings
