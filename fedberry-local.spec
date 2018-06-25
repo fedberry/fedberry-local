@@ -13,7 +13,6 @@ Source5:    https://github.com/fedberry/%{name}/blob/master/rpi-snd-bcm2835-rout
 Source6:    https://github.com/fedberry/%{name}/blob/master/rpi-snd-bcm2835-route-auto
 Source7:    https://github.com/fedberry/%{name}/blob/master/rpi-snd-bcm2835-route-hdmi
 Source8:    https://github.com/fedberry/%{name}/blob/master/sysctl-vm_min_free_kbytes.conf
-Source9:    https://github.com/fedberry/%{name}/blob/master/udev-vchiq-permissions.rules
 Source10:   https://github.com/fedberry/%{name}/blob/master/sysctl-quiet-printk.conf
 Source11:   https://github.com/fedberry/%{name}/blob/master/pulseaudio-raspberrypi.conf
 Source12:   https://github.com/fedberry/%{name}/blob/master/pulseaudio-rpi.rules
@@ -94,11 +93,9 @@ mkdir -p %{buildroot}/%{_libdir}/sysctl.d
 ##
 ## /usr/lib/udev/rules.d
 ##
-mkdir -p %{buildroot}/%{_libdir}/udev/rules.d
-%{__install} -p -m0644 %{SOURCE9} \
-%{buildroot}/%{_libdir}/udev/rules.d/10-vchiq-permissions.rules
+mkdir -p %{buildroot}%{_udevrulesdir}
 %{__install} -p -m0644 %{SOURCE12} \
-%{buildroot}/%{_libdir}/udev/rules.d/91-pulseaudio-rpi.rules
+%{buildroot}%{_udevrulesdir}/91-pulseaudio-rpi.rules
 
 ##
 ## Utility scripts
@@ -179,7 +176,7 @@ fi
 %config(noreplace) /boot/cmdline.txt
 %config(noreplace) /boot/config.txt
 %config(noreplace) %{_libdir}/sysctl.d/*.conf
-%{_libdir}/udev/rules.d/*.rules
+%{_udevrulesdir}/*.rules
 %{_datadir}/pulseaudio/alsa-mixer/profile-sets/*.conf
 
 
