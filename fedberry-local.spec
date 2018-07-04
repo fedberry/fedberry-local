@@ -3,31 +3,37 @@ Version:    27
 Release:    6%{?dist}
 Summary:    FedBerry rc.local, configs and scripts for the Raspberry Pi
 License:    GPLv2+
-URL:        https://github.com/fedberry
-Source0:    https://github.com/fedberry/%{name}/blob/master/cmdline.txt
-Source1:    https://github.com/fedberry/%{name}/blob/master/config.txt
-Source2:    https://github.com/fedberry/%{name}/blob/master/COPYING
-Source3:    https://github.com/fedberry/%{name}/blob/master/dracut-rpi.conf
-Source4:    https://github.com/fedberry/%{name}/blob/master/rc.local
-Source5:    https://github.com/fedberry/%{name}/blob/master/rpi-snd-bcm2835-route-analogue
-Source6:    https://github.com/fedberry/%{name}/blob/master/rpi-snd-bcm2835-route-auto
-Source7:    https://github.com/fedberry/%{name}/blob/master/rpi-snd-bcm2835-route-hdmi
-Source8:    https://github.com/fedberry/%{name}/blob/master/sysctl-vm_min_free_kbytes.conf
-Source10:   https://github.com/fedberry/%{name}/blob/master/sysctl-quiet-printk.conf
-Source11:   https://github.com/fedberry/%{name}/blob/master/pulseaudio-raspberrypi.conf
-Source12:   https://github.com/fedberry/%{name}/blob/master/pulseaudio-rpi.rules
-Source13:   https://github.com/fedberry/%{name}/blob/master/fedberry-xfce-defaults.tar.xz
-Source14:   https://github.com/fedberry/%{name}/blob/master/default-gtk2.conf
-Source15:   https://github.com/fedberry/%{name}/blob/master/default-gtk3.conf
-Source16:   https://github.com/fedberry/%{name}/blob/master/xorg-fbturbo.conf
-Source17:   https://github.com/fedberry/%{name}/blob/master/disable-pulseaudio.desktop
+URL:        https://github.com/%{name}
+Source0:    https://raw.githubusercontent.com/fedberry/%{name}/master/cmdline.txt
+Source1:    https://raw.githubusercontent.com/fedberry/%{name}/master/config.txt
+Source2:    https://raw.githubusercontent.com/fedberry/%{name}/master/COPYING
+Source3:    https://raw.githubusercontent.com/fedberry/%{name}/master/dracut-rpi.conf
+Source4:    https://raw.githubusercontent.com/fedberry/%{name}/master/rc.local
+Source5:    https://raw.githubusercontent.com/fedberry/%{name}/master/rpi-snd-bcm2835-route-analogue
+Source6:    https://raw.githubusercontent.com/fedberry/%{name}/master/rpi-snd-bcm2835-route-auto
+Source7:    https://raw.githubusercontent.com/fedberry/%{name}/master/rpi-snd-bcm2835-route-hdmi
+Source8:    https://raw.githubusercontent.com/fedberry/%{name}/master/sysctl-vm_min_free_kbytes.conf
+Source10:   https://raw.githubusercontent.com/fedberry/%{name}/master/sysctl-quiet-printk.conf
+Source11:   https://raw.githubusercontent.com/fedberry/%{name}/master/pulseaudio-raspberrypi.conf
+Source12:   https://raw.githubusercontent.com/fedberry/%{name}/master/pulseaudio-rpi.rules
+Source13:   https://raw.githubusercontent.com/fedberry/%{name}/master/fedberry-xfce-defaults.tar.xz
+Source14:   https://raw.githubusercontent.com/fedberry/%{name}/master/default-gtk2.conf
+Source15:   https://raw.githubusercontent.com/fedberry/%{name}/master/default-gtk3.conf
+Source16:   https://raw.githubusercontent.com/fedberry/%{name}/master/xorg-fbturbo.conf
+Source17:   https://raw.githubusercontent.com/fedberry/%{name}/master/disable-pulseaudio.desktop
 BuildArch:  noarch
 Requires:   initscripts
 Requires:   systemd
 
+%description
+%{summary}.
+
 
 %package xfce-config
 Summary: Default Fedberry configuration files for Xfce
+
+%description xfce-config
+This package contains default Fedberry configuration files for Xfce.
 
 
 %package gtk-config
@@ -36,22 +42,13 @@ Requires: breeze-gtk
 Requires: breeze-icon-theme
 Requires: breeze-cursor-theme
 
-%package xorg-config
-Summary: Default Fedberry configuration files for xorg
-Requires: xorg-x11-drv-fbturbo
-
-
-%description
-%{summary}.
-
-
-%description xfce-config
-This package contains default Fedberry configuration files for Xfce.
-
-
 %description gtk-config
 This package contains default Fedberry configuration files for GTK+2/3.
 
+
+%package xorg-config
+Summary: Default Fedberry configuration files for xorg
+Requires: xorg-x11-drv-fbturbo
 
 %description xorg-config
 This package contains default Fedberry configuration files for xorg.
@@ -66,8 +63,6 @@ cp -a %{SOURCE2} .
 
 
 %install
-rm -rf %{buildroot}
-
 ##
 ## rc.local
 ##
@@ -140,7 +135,7 @@ mkdir -p %{buildroot}/%{_sysconfdir}/gtk-3.0
 %{buildroot}/%{_sysconfdir}/gtk-3.0/settings.ini
 
 ##
-## xorg.conf.d
+## xorg.conf.d files
 ##
 mkdir -p %{buildroot}/%{_datadir}/X11/xorg.conf.d
 %{__install} -p -m0755 %{SOURCE16} \
@@ -159,12 +154,12 @@ fi
 
 
 %files gtk-config
-%config(noreplace) %attr(0755,-,-) %{_sysconfdir}/gtk-2.0/gtkrc
-%config(noreplace) %attr(0755,-,-) %{_sysconfdir}/gtk-3.0/settings.ini
+%config(noreplace) %{_sysconfdir}/gtk-2.0/gtkrc
+%config(noreplace) %{_sysconfdir}/gtk-3.0/settings.ini
 
 
 %files xorg-config
-%config(noreplace) %attr(0755,-,-) %{_datadir}/X11/xorg.conf.d/20-fbturbo.conf
+%config(noreplace) %{_datadir}/X11/xorg.conf.d/20-fbturbo.conf
 
 
 %files
@@ -243,7 +238,7 @@ fi
 - Drop all regional specific config.txt examples.
 - cmdline.txt option elevator=deadline now default for all releases
 - Bump release
-  
+
 * Thu Feb 04 2016 Vaughan <devel at agrez dot net> - 23-1
 - Rename package to fedberry-local
 - Version now follows FedBerry distro release version
@@ -264,7 +259,7 @@ fi
   refer to: https://github.com/raspberrypi/firmware/issues/428
 
 * Wed Aug 19 2015 Vaughan <devel at agrez dot net> - 1.0.2-1
-- Disable dracut creating kernel rescue images (rpi.conf) 
+- Disable dracut creating kernel rescue images (rpi.conf)
 
 * Sun Jun 14 2015 Vaughan <devel at agrez dot net> - 1.0.1-1
 - Disable enabling of ondemand govenor in rc.local (its now default in my kernel)
