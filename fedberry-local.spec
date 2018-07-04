@@ -21,6 +21,8 @@ Source14:   https://raw.githubusercontent.com/fedberry/%{name}/master/default-gt
 Source15:   https://raw.githubusercontent.com/fedberry/%{name}/master/default-gtk3.conf
 Source16:   https://raw.githubusercontent.com/fedberry/%{name}/master/xorg-fbturbo.conf
 Source17:   https://raw.githubusercontent.com/fedberry/%{name}/master/disable-pulseaudio.desktop
+Source18:   https://raw.githubusercontent.com/fedberry/%{name}/master/chromium-preferences
+Source19:   https://raw.githubusercontent.com/fedberry/%{name}/master/chromium-flags
 BuildArch:  noarch
 Requires:   initscripts
 Requires:   systemd
@@ -52,6 +54,15 @@ Requires: xorg-x11-drv-fbturbo
 
 %description xorg-config
 This package contains default Fedberry configuration files for xorg.
+
+
+%package chromium
+Summary: Default Fedberry configuration files for chromium
+Requires: chromium
+Requires: raspberrypi-vc-libs >= 20180704-1.409dfcd
+
+%description chromium
+This package contains default Fedberry configuration files for chromium.
 
 
 %prep
@@ -141,6 +152,15 @@ mkdir -p %{buildroot}/%{_datadir}/X11/xorg.conf.d
 %{__install} -p -m0755 %{SOURCE16} \
 %{buildroot}/%{_datadir}/X11/xorg.conf.d/20-fbturbo.conf
 
+##
+## chromium files
+##
+mkdir -p %{buildroot}/%{_sysconfdir}/chromium
+%{__install} -p -m0755 %{SOURCE18} \
+%{buildroot}/%{_sysconfdir}/chromium/master_preferences
+%{__install} -p -m0755 %{SOURCE19} \
+%{buildroot}/%{_sysconfdir}/chromium/default
+
 
 %post
 # Older upgraded installs that haven't installed the new xorg-conf package
@@ -160,6 +180,12 @@ fi
 
 %files xorg-config
 %config(noreplace) %{_datadir}/X11/xorg.conf.d/20-fbturbo.conf
+
+
+%files chromium
+%{_sysconfdir}/chromium/master_preferences
+%config(noreplace) %{_sysconfdir}/chromium/master_preferences
+%config(noreplace) %{_sysconfdir}/chromium/default
 
 
 %files
