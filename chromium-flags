@@ -1,0 +1,6 @@
+CHROMIUM_FLAGS="\
+--disable-smooth-scrolling \
+--disable-quic \
+--enable-tcp-fast-open \
+--enable-fast-unload \
+--disable-gpu-compositing"
