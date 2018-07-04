@@ -1,6 +1,6 @@
 Name:       fedberry-local
 Version:    27
-Release:    6%{?dist}
+Release:    7%{?dist}
 Summary:    FedBerry rc.local, configs and scripts for the Raspberry Pi
 License:    GPLv2+
 URL:        https://github.com/%{name}
@@ -202,6 +202,11 @@ fi
 
 
 %changelog
+* Wed Jul 04 2018 Vaughan <devel at agrez dot net> - 27-7
+- Dropped 10-vchiq-permissions.rules (moved to raspberrypi-vc-libs)
+- Add chromium defaults & master_preferences for Fedberry
+- Misc spec cleanups / refactoring
+
 * Tue Apr 03 2018 Vaughan <devel at agrez dot net> - 27-6
 - Add package for default GTK+2/3 settings
 - Add package for xorg.conf.d config (fbturbo.conf)
