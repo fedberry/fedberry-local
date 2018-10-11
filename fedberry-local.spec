@@ -1,5 +1,5 @@
 Name:       fedberry-local
-Version:    28
+Version:    29
 Release:    1%{?dist}
 Summary:    FedBerry rc.local, configs and scripts for the Raspberry Pi
 License:    GPLv2+
@@ -23,7 +23,9 @@ Source16:   https://raw.githubusercontent.com/fedberry/%{name}/master/xorg-fbtur
 Source17:   https://raw.githubusercontent.com/fedberry/%{name}/master/disable-pulseaudio.desktop
 Source18:   https://raw.githubusercontent.com/fedberry/%{name}/master/chromium-preferences
 Source19:   https://raw.githubusercontent.com/fedberry/%{name}/master/chromium-flags
-BuildArch:  noarch
+BuildArch:      noarch
+BuildRequires:  systemd
+
 Requires:   initscripts
 Requires:   systemd
 
@@ -202,6 +204,10 @@ fi
 
 
 %changelog
+* Thu Oct 11 2018 Vaughan <devel at agrez dot net> - 29-1
+- Bump release for Fedberry 29
+- Add enable_uart=1 comment stub to config.txt
+
 * Wed Jul 04 2018 Vaughan <devel at agrez dot net> - 28-1
 - Bump release for Fedberry 28
 - Dropped 10-vchiq-permissions.rules (moved to raspberrypi-vc-libs)
@@ -263,7 +269,7 @@ fi
 - Prep for FedBerry 24 release
 - Split out all files
 
-* Fri Mar 12 2016 Vaughan <devel at agrez dot net> - 23.1-1
+* Fri Mar 11 2016 Vaughan <devel at agrez dot net> - 23.1-1
 - Drop modules-load-snd-bcm2835.conf (its a DT parameter now)
 - Enable DT parameter audio=on by default
 - Clean up / refactor config.txt options
