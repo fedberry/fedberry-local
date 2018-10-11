@@ -17,6 +17,9 @@ disable_splash=1
 #start_x=1
 #disable_camera_led=1
 
+### UART console when booting RPi3
+#enable_uart=1
+
 
 ### Display Options
 
