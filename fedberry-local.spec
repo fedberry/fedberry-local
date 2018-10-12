@@ -9,9 +9,6 @@ Source1:    https://raw.githubusercontent.com/fedberry/%{name}/master/config.txt
 Source2:    https://raw.githubusercontent.com/fedberry/%{name}/master/COPYING
 Source3:    https://raw.githubusercontent.com/fedberry/%{name}/master/dracut-rpi.conf
 Source4:    https://raw.githubusercontent.com/fedberry/%{name}/master/rc.local
-Source5:    https://raw.githubusercontent.com/fedberry/%{name}/master/rpi-snd-bcm2835-route-analogue
-Source6:    https://raw.githubusercontent.com/fedberry/%{name}/master/rpi-snd-bcm2835-route-auto
-Source7:    https://raw.githubusercontent.com/fedberry/%{name}/master/rpi-snd-bcm2835-route-hdmi
 Source8:    https://raw.githubusercontent.com/fedberry/%{name}/master/sysctl-vm_min_free_kbytes.conf
 Source10:   https://raw.githubusercontent.com/fedberry/%{name}/master/sysctl-quiet-printk.conf
 Source11:   https://raw.githubusercontent.com/fedberry/%{name}/master/pulseaudio-raspberrypi.conf
@@ -105,13 +102,6 @@ mkdir -p %{buildroot}%{_udevrulesdir}
 %{__install} -p -m0644 %{SOURCE12} \
 %{buildroot}%{_udevrulesdir}/91-pulseaudio-rpi.rules
 
-##
-## Utility scripts
-##
-mkdir -p %{buildroot}/%{_sbindir}
-%{__install} -p -m0755 %{SOURCE6} %{buildroot}/%{_sbindir}/
-%{__install} -p -m0755 %{SOURCE5} %{buildroot}/%{_sbindir}/
-%{__install} -p -m0755 %{SOURCE7} %{buildroot}/%{_sbindir}/
 
 ##
 ## /boot config
@@ -192,7 +182,6 @@ fi
 
 %files
 %doc COPYING
-%{_sbindir}/*
 %{_sysconfdir}/skel/.config/autostart/pulseaudio.desktop
 %config(noreplace) %{_sysconfdir}/rc.d/rc.local
 %config(noreplace) %{_sysconfdir}/dracut.conf.d/*.conf

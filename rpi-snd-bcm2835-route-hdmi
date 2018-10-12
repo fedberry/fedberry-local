@@ -1,2 +1,0 @@
-#!/bin/bash
-amixer -c0 cset numid=3 2
