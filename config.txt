@@ -13,7 +13,7 @@ gpu_mem=32
 ### Disable rainbow splash at boot
 disable_splash=1
 
-### Raspberry camera module (requires gpu_mem=128 or more to work)
+### Raspberry camera module (requires gpu_mem >= 128 MB)
 #start_x=1
 #disable_camera_led=1
 
