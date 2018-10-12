@@ -1,25 +1,25 @@
 Name:       fedberry-local
 Version:    29
-Release:    1%{?dist}
+Release:    2%{?dist}
 Summary:    FedBerry rc.local, configs and scripts for the Raspberry Pi
 License:    GPLv2+
 URL:        https://github.com/%{name}
-Source0:    https://raw.githubusercontent.com/fedberry/%{name}/master/cmdline.txt
-Source1:    https://raw.githubusercontent.com/fedberry/%{name}/master/config.txt
-Source2:    https://raw.githubusercontent.com/fedberry/%{name}/master/COPYING
-Source3:    https://raw.githubusercontent.com/fedberry/%{name}/master/dracut-rpi.conf
-Source4:    https://raw.githubusercontent.com/fedberry/%{name}/master/rc.local
-Source8:    https://raw.githubusercontent.com/fedberry/%{name}/master/sysctl-vm_min_free_kbytes.conf
-Source10:   https://raw.githubusercontent.com/fedberry/%{name}/master/sysctl-quiet-printk.conf
-Source11:   https://raw.githubusercontent.com/fedberry/%{name}/master/pulseaudio-raspberrypi.conf
-Source12:   https://raw.githubusercontent.com/fedberry/%{name}/master/pulseaudio-rpi.rules
-Source13:   https://raw.githubusercontent.com/fedberry/%{name}/master/fedberry-xfce-defaults.tar.xz
-Source14:   https://raw.githubusercontent.com/fedberry/%{name}/master/default-gtk2.conf
-Source15:   https://raw.githubusercontent.com/fedberry/%{name}/master/default-gtk3.conf
-Source16:   https://raw.githubusercontent.com/fedberry/%{name}/master/xorg-fbturbo.conf
-Source17:   https://raw.githubusercontent.com/fedberry/%{name}/master/disable-pulseaudio.desktop
-Source18:   https://raw.githubusercontent.com/fedberry/%{name}/master/chromium-preferences
-Source19:   https://raw.githubusercontent.com/fedberry/%{name}/master/chromium-flags
+Source0:    %{url}/raw/master/cmdline.txt
+Source1:    %{url}/raw/master/config.txt
+Source2:    %{url}/raw/master/COPYING
+Source3:    %{url}/raw/master/dracut-rpi.conf
+Source4:    %{url}/raw/master/rc.local
+Source8:    %{url}/raw/master/sysctl-vm_min_free_kbytes.conf
+Source10:   %{url}/raw/master/sysctl-quiet-printk.conf
+Source11:   %{url}/raw/master/pulseaudio-raspberrypi.conf
+Source12:   %{url}/raw/master/pulseaudio-rpi.rules
+Source13:   %{url}/raw/master/fedberry-xfce-defaults.tar.xz
+Source14:   %{url}/raw/master/default-gtk2.conf
+Source15:   %{url}/raw/master/default-gtk3.conf
+Source16:   %{url}/raw/master/xorg-fbturbo.conf
+Source17:   %{url}/raw/master/disable-pulseaudio.desktop
+Source18:   %{url}/raw/master/chromium-preferences
+Source19:   %{url}/raw/master/chromium-flags
 BuildArch:      noarch
 BuildRequires:  systemd
 
@@ -193,6 +193,10 @@ fi
 
 
 %changelog
+* Fri Oct 12 2018 Vaughan <devel at agrez dot net> - 29-2
+- Drop rpi-snd-bcm2835-* scripts (fedberry-config now support this)
+- Refactor source file urls
+
 * Thu Oct 11 2018 Vaughan <devel at agrez dot net> - 29-1
 - Bump release for Fedberry 29
 - Add enable_uart=1 comment stub to config.txt
