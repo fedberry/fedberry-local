@@ -1,6 +1,6 @@
 Name:       fedberry-local
 Version:    29
-Release:    2%{?dist}
+Release:    3%{?dist}
 Summary:    FedBerry rc.local, configs and scripts for the Raspberry Pi
 License:    GPLv2+
 URL:        https://github.com/%{name}
@@ -195,6 +195,12 @@ fi
 
 
 %changelog
+* Mon Nov 26 2018 Vaughan <devel at agrez dot net> - 29-3
+- Lower swappiness from 60 (default) to 10
+- Gain some more control over some system config files
+- Remove chromium extensions in master_preferences
+- Update fedberry-xfce-defaults to workaround tool tip flickering bug
+
 * Fri Oct 12 2018 Vaughan <devel at agrez dot net> - 29-2
 - Drop rpi-snd-bcm2835-* scripts (fedberry-config now support this)
 - Refactor source file urls
