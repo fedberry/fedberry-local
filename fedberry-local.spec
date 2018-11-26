@@ -169,18 +169,17 @@ fi
 
 
 %files gtk-config
-%config(noreplace) %{_sysconfdir}/gtk-2.0/gtkrc
-%config(noreplace) %{_sysconfdir}/gtk-3.0/settings.ini
+%config %{_sysconfdir}/gtk-2.0/gtkrc
+%config %{_sysconfdir}/gtk-3.0/settings.ini
 
 
 %files xorg-config
-%config(noreplace) %{_datadir}/X11/xorg.conf.d/20-fbturbo.conf
+%config %{_datadir}/X11/xorg.conf.d/20-fbturbo.conf
 
 
 %files chromium
-%{_sysconfdir}/chromium/master_preferences
-%config(noreplace) %{_sysconfdir}/chromium/master_preferences
-%config(noreplace) %{_sysconfdir}/chromium/default
+%config %{_sysconfdir}/chromium/master_preferences
+%config %{_sysconfdir}/chromium/default
 
 
 %files
