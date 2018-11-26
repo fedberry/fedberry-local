@@ -9,7 +9,8 @@ Source1:    %{url}/raw/master/config.txt
 Source2:    %{url}/raw/master/COPYING
 Source3:    %{url}/raw/master/dracut-rpi.conf
 Source4:    %{url}/raw/master/rc.local
-Source8:    %{url}/raw/master/sysctl-vm_min_free_kbytes.conf
+Source8:    %{url}/raw/master/sysctl-vm-min-free-kbytes.conf
+Source9:    %{url}/raw/master/sysctl-vm-swappiness.conf
 Source10:   %{url}/raw/master/sysctl-quiet-printk.conf
 Source11:   %{url}/raw/master/pulseaudio-raspberrypi.conf
 Source12:   %{url}/raw/master/pulseaudio-rpi.rules
@@ -91,7 +92,9 @@ mkdir -p %{buildroot}/%{_sysconfdir}/dracut.conf.d
 ##
 mkdir -p %{buildroot}/%{_libdir}/sysctl.d
 %{__install} -p -m0644 %{SOURCE8} \
-%{buildroot}/%{_libdir}/sysctl.d/99-vm_min_free_kbytes.conf
+%{buildroot}/%{_libdir}/sysctl.d/99-vm-min-free-kbytes.conf
+%{__install} -p -m0644 %{SOURCE9} \
+%{buildroot}/%{_libdir}/sysctl.d/99-vm-swappiness.conf
 %{__install} -p -m0644 %{SOURCE10} \
 %{buildroot}/%{_libdir}/sysctl.d/20-quiet-printk.conf
 
