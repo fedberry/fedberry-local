@@ -1,6 +1,6 @@
 Name:       fedberry-local
 Version:    29
-Release:    3%{?dist}
+Release:    4%{?dist}
 Summary:    FedBerry rc.local, configs and scripts for the Raspberry Pi
 License:    GPLv2+
 URL:        https://github.com/%{name}
@@ -195,6 +195,9 @@ fi
 
 
 %changelog
+* Tue Nov 27 2018 Vaughan <devel at agrez dot net> - 29-4
+- Update xfce defaults (xfce-mixer is depreciated)
+
 * Mon Nov 26 2018 Vaughan <devel at agrez dot net> - 29-3
 - Lower swappiness from 60 (default) to 10
 - Gain some more control over some system config files
