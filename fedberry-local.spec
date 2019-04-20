@@ -1,6 +1,6 @@
 Name:       fedberry-local
-Version:    29
-Release:    5%{?dist}
+Version:    30
+Release:    1%{?dist}
 Summary:    FedBerry rc.local, configs and scripts for the Raspberry Pi
 License:    GPLv2+
 URL:        https://github.com/%{name}
@@ -195,6 +195,10 @@ fi
 
 
 %changelog
+* Sat Apr 20 2019 Vaughan <devel at agrez dot net> - 30-1
+- Bump release for Fedberry 30
+- Update chromuim-flags
+
 * Wed Nov 28 2018 Vaughan <devel at agrez dot net> - 29-5
 - Update xfce defaults (default to Breeze theme & drop Parole config)
 
