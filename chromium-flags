@@ -3,4 +3,6 @@ CHROMIUM_FLAGS="\
 --disable-quic \
 --enable-tcp-fast-open \
 --enable-fast-unload \
---disable-gpu-compositing"
+--disable-gpu-compositing
+--show-component-extension-options
+--no-default-browser-check"
