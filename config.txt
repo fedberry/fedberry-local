@@ -66,13 +66,12 @@ disable_splash=1
 # Device Tree overlays and parameters
 ###
 
-
 ### Uncomment some or all of these to enable the optional hardware interfaces
 
 # Completely disable device tree overlays
 #device_tree=
 
-### Base bcm2709-rpi-2-b.dtb paramters.
+### Base dtb paramters.
 ### Refer to /boot/overlay/README for detailed parameter descriptions
 
 dtparam=audio=on
@@ -82,5 +81,12 @@ dtparam=audio=on
 #dtparam=watchdog=on
 
 
-### Misc Device tree overlays
+### Configs specifically for RPi4
+[pi4]
+# Enable DRM VC4 V3D driver on top of dispmanx display stack
+dtoverlay=vc4-fkms-v3d
+max_framebuffers=2
 
+
+### Configs for all other RPi revisions
+[all]
