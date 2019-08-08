@@ -84,7 +84,7 @@ mkdir -p %{buildroot}/%{_sysconfdir}/rc.d
 ## dracut.conf.d
 ##
 mkdir -p %{buildroot}/%{_sysconfdir}/dracut.conf.d
-%{__install} -p -m0755 %{SOURCE3} \
+%{__install} -p -m0644 %{SOURCE3} \
 %{buildroot}/%{_sysconfdir}/dracut.conf.d/rpi.conf
 
 ##
@@ -133,27 +133,27 @@ tar xvfJ %{SOURCE13} -C %{buildroot}/%{_sysconfdir}/skel/.config
 ## GTK+ configuration files
 ##
 mkdir -p %{buildroot}/%{_sysconfdir}/gtk-2.0
-%{__install} -p -m0755 %{SOURCE14} \
+%{__install} -p -m0644 %{SOURCE14} \
 %{buildroot}/%{_sysconfdir}/gtk-2.0/gtkrc
 
 mkdir -p %{buildroot}/%{_sysconfdir}/gtk-3.0
-%{__install} -p -m0755 %{SOURCE15} \
+%{__install} -p -m0644 %{SOURCE15} \
 %{buildroot}/%{_sysconfdir}/gtk-3.0/settings.ini
 
 ##
 ## xorg.conf.d files
 ##
 mkdir -p %{buildroot}/%{_datadir}/X11/xorg.conf.d
-%{__install} -p -m0755 %{SOURCE16} \
+%{__install} -p -m0644 %{SOURCE16} \
 %{buildroot}/%{_datadir}/X11/xorg.conf.d/20-fbturbo.conf
 
 ##
 ## chromium files
 ##
 mkdir -p %{buildroot}/%{_sysconfdir}/chromium
-%{__install} -p -m0755 %{SOURCE18} \
+%{__install} -p -m0644 %{SOURCE18} \
 %{buildroot}/%{_sysconfdir}/chromium/master_preferences
-%{__install} -p -m0755 %{SOURCE19} \
+%{__install} -p -m0644 %{SOURCE19} \
 %{buildroot}/%{_sysconfdir}/chromium/default
 
 
