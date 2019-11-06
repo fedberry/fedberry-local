@@ -81,12 +81,8 @@ dtparam=audio=on
 #dtparam=watchdog=on
 
 
-### Configs specifically for RPi4
 [pi4]
-# Enable DRM VC4 V3D driver on top of dispmanx display stack
-dtoverlay=vc4-fkms-v3d
-max_framebuffers=2
 
 
-### Configs for all other RPi revisions
+
 [all]
